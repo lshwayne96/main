@@ -87,6 +87,21 @@ public interface Model {
     boolean hasModuleTaken(ModuleTaken moduleTaken);
 
     /**
+     * Returns true if a moduleTaken has all its prerequisites satisfied.
+     */
+    boolean isEligibleModuleTaken(ModuleTaken moduleTaken);
+
+    /**
+     * Returns true if editing the moduleTaken will not cause other prerequisites to be unsatisfied
+     */
+    boolean canEditModuleTaken(ModuleTaken moduleTakenToEdit, ModuleTaken editedModuleTaken);
+
+    /**
+     * Returns true if deleting the moduleTaken will not cause other prerequisites to be unsatisfied
+     */
+    boolean canDeleteModuleTaken(ModuleTaken moduleTaken);
+
+    /**
      * Deletes the given moduleTaken.
      * The moduleTaken must exist in the GradTrak .
      */

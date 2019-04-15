@@ -41,7 +41,11 @@ public class DeleteCommand extends Command {
         }
 
         ModuleTaken moduleTakenToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteModuleTaken(moduleTakenToDelete);
+        if (model.canDeleteModuleTaken(moduleTakenToDelete)) {
+            model.deleteModuleTaken(moduleTakenToDelete);
+        } else {
+            throw new CommandException(Messages.MESSAGE_PREREQUISITE_VIOLATED);
+        }
         model.commitGradTrak();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, moduleTakenToDelete));
     }

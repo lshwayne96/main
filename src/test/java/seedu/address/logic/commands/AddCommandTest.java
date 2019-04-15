@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -17,9 +18,11 @@ import org.junit.rules.ExpectedException;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ClassForPrinting;
+import seedu.address.model.EligibleModulePredicate;
 import seedu.address.model.GradTrak;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyGradTrak;
@@ -36,6 +39,7 @@ import seedu.address.model.moduleinfo.ModuleInfoList;
 import seedu.address.model.moduletaken.ModuleTaken;
 import seedu.address.model.moduletaken.Semester;
 import seedu.address.model.recmodule.RecModule;
+import seedu.address.storage.moduleinfostorage.ModuleInfoManager;
 import seedu.address.testutil.ModuleTakenBuilder;
 
 public class AddCommandTest {
@@ -104,6 +108,20 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        private final ModuleInfoList moduleInfoList;
+
+        ModelStub() {
+            ModuleInfoManager moduleInfoManager = new ModuleInfoManager();
+            Optional<ModuleInfoList> list = Optional.empty();
+            try {
+                list = moduleInfoManager.readModuleInfoFile();
+            } catch (DataConversionException dce) {
+                System.err.println("Error reading json");
+            }
+            assert (list.isPresent());
+            moduleInfoList = list.get();
+        }
+
         @Override
         public void setCourse(CourseName course) {
             throw new AssertionError("This method should not be called.");
@@ -168,6 +186,24 @@ public class AddCommandTest {
         public boolean hasModuleTaken(ModuleTaken moduleTaken) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean isEligibleModuleTaken(ModuleTaken moduleTaken) {
+            requireNonNull(moduleTaken);
+            ModuleInfo moduleInfo = moduleInfoList.getModule(moduleTaken.getModuleInfoCode().value);
+            return new EligibleModulePredicate(new GradTrak()).test(moduleInfo);
+        }
+
+        @Override
+        public boolean canEditModuleTaken(ModuleTaken moduleTakenToEdit, ModuleTaken editedModuleTaken) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canDeleteModuleTaken(ModuleTaken moduleTaken) {
+            throw new AssertionError("This method should not be called.");
+        }
+
 
         @Override
         public void deleteModuleTaken(ModuleTaken target) {
@@ -282,7 +318,7 @@ public class AddCommandTest {
 
         @Override
         public ModuleInfoList getModuleInfoList() {
-            return new ModuleInfoList();
+            return moduleInfoList;
         }
 
         public void updateRecModuleList() {

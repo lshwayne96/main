@@ -46,6 +46,13 @@ public class ModuleInfoList {
         return module;
     }
 
+    /**
+     * Returns true if moduleInfoList is empty
+     */
+    public boolean isEmpty() {
+        return moduleInfoList.isEmpty();
+    }
+
     public ObservableList<ModuleInfo> getObservableList() {
         ObservableList<ModuleInfo> observableList = FXCollections.observableArrayList(moduleInfoList);
         return observableList;

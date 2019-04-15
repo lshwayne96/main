@@ -165,5 +165,17 @@ public class GradTrakTest {
         public ArrayList<String> getMissingPrerequisites(ModuleTree moduleTree) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ArrayList<String> getMissingPrerequisitesWithoutModule(ModuleTree moduleTree, ModuleTaken moduleTaken) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<String> getMissingPrerequisitesWithEditedModule(ModuleTree moduleTree,
+                                                                         ModuleTaken moduleTakenToEdit,
+                                                                         ModuleTaken editedModuleTaken) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 }

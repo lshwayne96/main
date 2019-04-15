@@ -33,7 +33,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        ModuleTaken validModuleTaken = new ModuleTakenBuilder().build();
+        ModuleTaken validModuleTaken = new ModuleTakenBuilder().withModuleInfoCode("CS1010").build();
 
         Model expectedModel = new ModelManager(model.getGradTrak(), new UserPrefs(),
                 new ModuleInfoList(), new CourseList(), new UserInfo());

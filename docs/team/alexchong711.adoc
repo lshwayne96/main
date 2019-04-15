@@ -67,7 +67,7 @@ include::../UserGuide.adoc[tag=SetSemesterLimit]
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project. This is so that future developers who wish to maintain and update my code will able to do so easily after reading the guide and understanding how the application works.
 
-The guide will include sequence diagrams about how the `cklimit`, `cursem`, and `setlimit` commands interact with the system, as well as class diagrams that describe the architecture of the system._
+The guide will include sequence diagrams about how the `cursem`, and `setlimit` commands interact with the system, as well as class diagrams that describe the architecture of the system._
 |===
 
 include::../DeveloperGuide.adoc[tag=CheckLimit]

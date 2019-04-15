@@ -52,7 +52,7 @@ public class TypicalModuleTaken {
     public static final ModuleTaken CS1010S = new ModuleTakenBuilder()
             .withModuleInfoCode("CS1010S")
             .withSemester("Y5S2")
-            .withExpectedMinGrade("D")
+            .withExpectedMinGrade("F")
             .withExpectedMaxGrade("A")
             .withLectureHour("0")
             .withTutorialHour("0")
@@ -61,7 +61,7 @@ public class TypicalModuleTaken {
             .withPreparationHour("0").build();
     public static final ModuleTaken CS1010X = new ModuleTakenBuilder()
             .withModuleInfoCode("CS1010X")
-            .withSemester("Y4S2")
+            .withSemester("Y5S2")
             .withExpectedMinGrade("F")
             .withExpectedMaxGrade("A")
             .withLectureHour("0")
@@ -168,6 +168,7 @@ public class TypicalModuleTaken {
             .build();
 
     public static final String KEYWORD_MATCHING_CS2103T = "CS2103T";
+    public static final String KEYWORD_MATCHING_CS1010S = "CS1010S";
     public static final String KEYWORD_MATCHING_MA1521 = "MA1521";
     public static final String KEYWORD_MATCHING_CS = "cs";
     public static final String KEYWORD_MATCHING_MA = "ma";
@@ -194,7 +195,7 @@ public class TypicalModuleTaken {
     }
 
     public static List<ModuleTaken> getTypicalModulesTaken() {
-        return new ArrayList<>(Arrays.asList(CS2103T, CS2101, CS1010S, CS1010X, MA1521, LSM1301, GER1000));
+        return new ArrayList<>(Arrays.asList(CS1010S, CS1010X, MA1521, LSM1301, GER1000));
     }
 
     public static List<SemesterLimit> getTypicalSemesterLimits() {

@@ -726,13 +726,13 @@ image::ClassForPrintingUsageExample.png[width="800"]
 
 * **Current choice: Using a single command to check both the CAP limits as well as the workload limits and print the results all to one page**
 ** Pros: Only one command needs to be known and it can check everything in one page to ensure that the module plan meets the selected limit preferences
-** Cons: Unwanted information that was not requested is also shown on the page and may cause confusion
+** Cons: Unwanted information that was not requested will also be shown on the page and may cause confusion
 
 * ** Alternative: Using separate commands to display CAP limits and workload limits on their own individual page**
-** Pros: The information needed can be easily identified from the page displayed
-** Cons: Two commands need to be known and keyed in to check the limits every time a modification is made to the module plan.
+** Pros: The information needed can be easily identified from the pages displayed
+** Cons: Two commands need to be known and keyed in to check the limits every time a modification is made to the module plan
 
-The current choice was chosen because the student will become more experienced and familiar GradTrak over time and be less confused by the result page. Scrolling up and down the page is easier than having to type two commands alternatively to view the limits.
+The current choice was chosen because the student will become more experienced and familiar with GradTrak over time and be less confused by the result page. Scrolling up and down the page is easier than having to type two commands alternatively to view the limits.
 
 ==== Possible Improvements
 . Check if any row has their minimum or maximum limits violated and highlight them to student
@@ -757,7 +757,7 @@ image::SetCurrentSemesterSequenceDiagram.png[width="1000"]
 
 * **Current choice: Storing of current semester within the `VersionedGradTrak` **
 ** Pros: Allows the `cursem` command to be undoable and redoable
-** Cons: The storage file `gradtrak.json` has to contain more than just the modules taken and it is difficult to make changes due to the requirement of a large scale restructuring of the application and multiple unit tests.
+** Cons: The storage file `gradtrak.json` has to contain more than just the modules taken and it is difficult to make changes as it would require restructuring a large part of the application and multiple unit tests.
 
 * ** Alternative: Storing of the current semester outside of the `VersionedGradTrak` together with the module and course information**
 ** Pros: Minimal changes are required to implement it
@@ -775,9 +775,9 @@ The current choice was chosen because it will be worth the effort to restructure
 
 ==== Current Implementation
 
-The `setlimit` command allows the student to set CAP limits and workload limits for each semester. This helps the student manage the difficulty and time required of the modules taken. Various types of limits can be set, such as the minimum and maximum number of weekly lecture hours, tutorial hours, lab hours, project hours, and preparation hours acceptable for each semester, as well as the minimum and maximum CAP acceptable for the semester.
+The `setlimit` command allows the student to set CAP limits and workload limits for each semester. This helps the student manage the difficulty and time required of the modules taken. Various types of limits can be set, such as the minimum and maximum number of weekly lecture hours, tutorial hours, lab hours, project hours, and preparation hours acceptable, as well as the minimum and maximum CAP acceptable for each semester.
 
-The interaction of how the `setlimit` command interacts with the system is shown below as a sequence diagram.
+The interaction of the `setlimit` command with the system is shown below as a sequence diagram.
 
 .Sequence Diagram for setting of the limits for a semester
 image::SetSemesterLimitSequenceDiagram.png[width="1000"]

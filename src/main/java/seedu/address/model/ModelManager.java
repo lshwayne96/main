@@ -19,6 +19,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.ModuleTree;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseList;
 import seedu.address.model.course.CourseName;
@@ -191,6 +192,52 @@ public class ModelManager implements Model {
     public boolean hasModuleTaken(ModuleTaken moduleTaken) {
         requireNonNull(moduleTaken);
         return versionedGradTrak.hasModuleTaken(moduleTaken);
+    }
+
+    @Override
+    public boolean isEligibleModuleTaken(ModuleTaken moduleTaken) {
+        requireNonNull(moduleTaken);
+        if (moduleInfoList.isEmpty()) { //cannot check if not module info
+            return true;
+        }
+        ModuleInfo moduleInfo = moduleInfoList.getModule(moduleTaken.getModuleInfoCode().value);
+        return new EligibleModulePredicate(versionedGradTrak).test(moduleInfo);
+    }
+
+    @Override
+    public boolean canEditModuleTaken(ModuleTaken moduleTakenToEdit, ModuleTaken editedModuleTaken) {
+        requireNonNull(moduleTakenToEdit);
+        requireNonNull(editedModuleTaken);
+        for (ModuleTaken module : versionedGradTrak.getModulesTakenList()) {
+            if (module.equals(moduleTakenToEdit)) {
+                continue;
+            }
+            ModuleInfo moduleInfo = moduleInfoList.getModule(module.getModuleInfoCode().value);
+            ModuleTree moduleTree = moduleInfo.getModuleInfoPrerequisite().getModuleTree();
+            if (!versionedGradTrak.getMissingPrerequisitesWithEditedModule(
+                    moduleTree, moduleTakenToEdit, editedModuleTaken).isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean canDeleteModuleTaken(ModuleTaken toDelete) {
+        requireNonNull(toDelete);
+        for (ModuleTaken module : versionedGradTrak.getModulesTakenList()) {
+            if (module.equals(toDelete)) {
+                continue;
+            }
+            ModuleInfo moduleInfo = moduleInfoList.getModule(module.getModuleInfoCode().value);
+            ModuleTree moduleTree = moduleInfo.getModuleInfoPrerequisite().getModuleTree();
+            if (!versionedGradTrak.getMissingPrerequisitesWithoutModule(moduleTree, toDelete).isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

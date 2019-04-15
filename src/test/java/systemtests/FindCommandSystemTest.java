@@ -52,7 +52,7 @@ public class FindCommandSystemTest extends GradTrakSystemTest {
         Model expectedModel = getModel();
 
         String command = FindCommand.COMMAND_WORD + " " + PREFIX_SEMESTER + "Y4S2";
-        ModelHelper.setFilteredList(expectedModel, CS1010X, LSM1301);
+        ModelHelper.setFilteredList(expectedModel, LSM1301);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
     }

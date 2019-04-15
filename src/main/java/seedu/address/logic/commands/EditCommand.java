@@ -91,6 +91,11 @@ public class EditCommand extends Command {
         ModuleTaken moduleTakenToEdit = lastShownList.get(index.getZeroBased());
         ModuleTaken editedModuleTaken = createEditedPerson(moduleTakenToEdit, editPersonDescriptor);
 
+        if (!moduleTakenToEdit.getModuleInfoCode().equals(editedModuleTaken.getModuleInfoCode())
+                && !model.canEditModuleTaken(moduleTakenToEdit, editedModuleTaken)) {
+            throw new CommandException(Messages.MESSAGE_PREREQUISITE_VIOLATED);
+        }
+
         if (editedModuleTaken.getExpectedMinGrade().getGradePoint()
                 > editedModuleTaken.getExpectedMaxGrade().getGradePoint()) {
             throw new CommandException(Messages.MESSAGE_GRADES_OUT_OF_ORDER);
@@ -110,17 +115,13 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        ModuleInfo moduleInfo = model.getModuleInfoList()
-                .getModule(String.valueOf(editedModuleTaken.getModuleInfoCode()));
-        if (moduleInfo != null) {
-            editedModuleTaken.setWorkload(new Workload(moduleInfo.getModuleInfoWorkload()));
+        ModuleInfo moduleInfo = model.getModuleInfoList().getModule(editedModuleTaken.getModuleInfoCode().value);
+
+        if (moduleInfo == null) {
+            throw new CommandException(Messages.MESSAGE_MODULE_DOES_NOT_EXIST);
         }
-        /*
-        else {
-            //TODO fix the tests
-            //throw new CommandException(Messages.MESSAGE_MODULE_DOES_NOT_EXIST);
-        }
-        */
+
+        editedModuleTaken.setWorkload(new Workload(moduleInfo.getModuleInfoWorkload()));
 
         model.setModuleTaken(moduleTakenToEdit, editedModuleTaken);
         model.updateFilteredModulesTakenList(PREDICATE_SHOW_ALL_PERSONS);

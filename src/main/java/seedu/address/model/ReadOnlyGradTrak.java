@@ -45,4 +45,25 @@ public interface ReadOnlyGradTrak extends Observable {
      * @return an {@code ArrayList} of {@code String} of missing prerequisites.
      */
     ArrayList<String> getMissingPrerequisites(ModuleTree moduleTree);
+
+    /**
+     * Generates an {@code ArrayList} of {@code String} of missing prerequisites in a {@code GradTrak}
+     * excluding the specified {@code ModuleTaken}, given the {@code ModuleTree} of the module.
+     * @param moduleTree The {@code ModuleTree} of the module whose missing prerequisites are being generated.
+     * @param moduleTaken The {@code ModuleTaken} to exclude.
+     * @return an {@code ArrayList} of {@code String} of missing prerequisites.
+     */
+    ArrayList<String> getMissingPrerequisitesWithoutModule(ModuleTree moduleTree, ModuleTaken moduleTaken);
+
+    /**
+     * Generates an {@code ArrayList} of {@code String} of missing prerequisites in a {@code GradTrak}
+     * excluding the specified {@code moduleTakenToEdit} but including the specified {@code editedModuleTaken},
+     * given the {@code ModuleTree} of the module.
+     * @param moduleTree The {@code ModuleTree} of the module whose missing prerequisites are being generated.
+     * @param moduleTakenToEdit The {@code ModuleTaken} to exclude.
+     * @param editedModuleTaken The {@code ModuleTaken} to include.
+     * @return an {@code ArrayList} of {@code String} of missing prerequisites.
+     */
+    ArrayList<String> getMissingPrerequisitesWithEditedModule(ModuleTree moduleTree, ModuleTaken moduleTakenToEdit,
+                                                              ModuleTaken editedModuleTaken);
 }

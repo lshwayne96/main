@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.function.Predicate;
 
 import seedu.address.model.moduleinfo.ModuleInfo;
@@ -19,6 +21,7 @@ public class EligibleModulePredicate implements Predicate<ModuleInfo> {
 
     @Override
     public boolean test(ModuleInfo moduleInfo) {
+        requireNonNull(moduleInfo);
         ModuleInfoCode code = moduleInfo.getModuleInfoCode();
         ModuleInfoPrerequisites prerequisites = moduleInfo.getModuleInfoPrerequisite();
 

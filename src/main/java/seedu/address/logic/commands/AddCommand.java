@@ -13,6 +13,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.moduleinfo.ModuleInfo;
+import seedu.address.model.moduleinfo.ModuleInfoList;
 import seedu.address.model.moduletaken.ModuleTaken;
 import seedu.address.model.moduletaken.Workload;
 
@@ -40,6 +41,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New moduleTaken added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This moduleTaken already exists in the address book";
+    public static final String MESSAGE_PREREQ_MISSING = "Prerequisites not satisfied";
 
     private final ModuleTaken toAdd;
 
@@ -55,8 +57,22 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        ModuleInfoList moduleInfoList = model.getModuleInfoList();
+        ModuleInfo moduleInfo = moduleInfoList.getModule(toAdd.getModuleInfoCode().value);
+
+        if (!moduleInfoList.isEmpty()) {
+            if (moduleInfo == null) {
+                throw new CommandException(Messages.MESSAGE_MODULE_DOES_NOT_EXIST);
+            }
+
+        }
+
         if (model.hasModuleTaken(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (!model.isEligibleModuleTaken(toAdd)) {
+            throw new CommandException(MESSAGE_PREREQ_MISSING);
         }
 
         if (toAdd.getExpectedMinGrade().getGradePoint()
@@ -73,16 +89,9 @@ public class AddCommand extends Command {
             throw new CommandException(Messages.MESSAGE_GRADES_NOT_FINALIZED_BEFORE_SEMESTER);
         }
 
-        ModuleInfo moduleInfo = model.getModuleInfoList().getModule(String.valueOf(toAdd.getModuleInfoCode()));
         if (moduleInfo != null) {
             toAdd.setWorkload(new Workload(moduleInfo.getModuleInfoWorkload()));
         }
-        /*
-        else {
-            //TODO fix the tests
-            throw new CommandException(Messages.MESSAGE_MODULE_DOES_NOT_EXIST);
-        }
-        */
 
         model.addModuleTaken(toAdd);
         model.commitGradTrak();

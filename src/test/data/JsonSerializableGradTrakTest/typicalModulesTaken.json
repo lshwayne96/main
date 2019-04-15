@@ -1,31 +1,9 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "modulesTaken" : [ {
-    "moduleInfoCode" : "CS2103T",
-    "semester" : "Y1S2",
-    "expectedMinGrade" : "F",
-    "expectedMaxGrade" : "A",
-    "lectureHour" : "0",
-    "tutorialHour" : "0",
-    "labHour" : "0",
-    "projectHour" : "0",
-    "preparationHour" : "0",
-    "tagged" : [ "friends" ]
-  }, {
-    "moduleInfoCode" : "CS2101",
-    "semester" : "Y3S2",
-    "expectedMinGrade" : "D",
-    "expectedMaxGrade" : "A",
-    "lectureHour" : "0",
-    "tutorialHour" : "0",
-    "labHour" : "0",
-    "projectHour" : "0",
-    "preparationHour" : "0",
-    "tagged" : [ "owesMoney", "friends" ]
-  }, {
     "moduleInfoCode" : "CS1010S",
     "semester" : "Y5S2",
-    "expectedMinGrade" : "D",
+    "expectedMinGrade" : "F",
     "expectedMaxGrade" : "A",
     "lectureHour" : "0",
     "tutorialHour" : "0",
@@ -35,7 +13,7 @@
     "tagged" : [ ]
   }, {
     "moduleInfoCode" : "CS1010X",
-    "semester" : "Y4S2",
+    "semester" : "Y5S2",
     "expectedMinGrade" : "F",
     "expectedMaxGrade" : "A",
     "lectureHour" : "0",

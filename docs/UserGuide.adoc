@@ -150,7 +150,7 @@ The `edit` command allows students to indicate their expected workloads for each
 [NOTE]
 The `setlimit` command allows students to indicate their workload preferences for each semester.
 
-The `cklimit` command calculates the total expected weekly workload of each semester and checks against the limit preferences set by the student. +
+The `cklimit` command calculates the total expected weekly workload of each semester and checks them against the limit preferences set by the student. +
 Format: `cklimit` +
 
 The image below shows the display after using the `cklimit` command and scrolling down the result page to the section on workload information:
@@ -500,7 +500,7 @@ Format: `setlimit SEMESTER [mincap/MIN_CAP] [maxcap/MAX_CAP]`
 
 Examples:
 
-* `setlimit s/Y1S1 mincap/2.52 maxcap/5` +
+* `setlimit Y1S1 mincap/2.52 maxcap/5` +
 This sets the minimum CAP acceptable to 2.52 and maximum CAP acceptable to 5.00 for the first semester in year 1.
 
 ****
@@ -531,7 +531,7 @@ Format: `setlimit SEMESTER [minlec/MIN_LECTURE_HOURS] [maxlec/MAX_LECTURE_HOURS]
 
 Examples:
 
-* `setlimit s/Y1S2 minlec/2.5 maxproj/3 maxprep/12` +
+* `setlimit Y1S2 minlec/2.5 maxproj/3` +
 This sets the minimum number of weekly lecture hours acceptable to 2.5 and maximum number of weekly project hours acceptable to 3 for the second semester in year 1.
 
 ****

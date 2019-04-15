@@ -10,10 +10,14 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalModuleTaken.getTypicalGradTrak;
 
+import java.util.Optional;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -22,6 +26,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.course.CourseList;
 import seedu.address.model.moduleinfo.ModuleInfoList;
 import seedu.address.model.moduletaken.ModuleTaken;
+import seedu.address.storage.moduleinfostorage.ModuleInfoManager;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -29,9 +34,25 @@ import seedu.address.model.moduletaken.ModuleTaken;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalGradTrak(), new UserPrefs(),
-            new ModuleInfoList(), new CourseList(), new UserInfo());
+    private Model model;
     private CommandHistory commandHistory = new CommandHistory();
+    private ModuleInfoList moduleInfoList;
+
+    @Before
+    public void setUp() {
+        ModuleInfoManager moduleInfoManager = new ModuleInfoManager();
+        Optional<ModuleInfoList> list = Optional.empty();
+        try {
+            list = moduleInfoManager.readModuleInfoFile();
+        } catch (DataConversionException dce) {
+            System.err.println("Error reading json");
+        }
+        assert (list.isPresent());
+        moduleInfoList = list.get();
+
+        model = new ModelManager(getTypicalGradTrak(), new UserPrefs(),
+                moduleInfoList, new CourseList(), new UserInfo());
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -41,7 +62,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, moduleTakenToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getGradTrak(), new UserPrefs(),
-                new ModuleInfoList(), new CourseList(), new UserInfo());
+                moduleInfoList, new CourseList(), new UserInfo());
         expectedModel.deleteModuleTaken(moduleTakenToDelete);
         expectedModel.commitGradTrak();
 
@@ -67,7 +88,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, moduleTakenToDelete);
 
         Model expectedModel = new ModelManager(model.getGradTrak(), new UserPrefs(),
-                new ModuleInfoList(), new CourseList(), new UserInfo());
+                moduleInfoList, new CourseList(), new UserInfo());
         expectedModel.deleteModuleTaken(moduleTakenToDelete);
         expectedModel.commitGradTrak();
         showNoPerson(expectedModel);
@@ -94,7 +115,7 @@ public class DeleteCommandTest {
         ModuleTaken moduleTakenToDelete = model.getFilteredModulesTakenList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         Model expectedModel = new ModelManager(model.getGradTrak(), new UserPrefs(),
-                new ModuleInfoList(), new CourseList(), new UserInfo());
+                moduleInfoList, new CourseList(), new UserInfo());
         expectedModel.deleteModuleTaken(moduleTakenToDelete);
         expectedModel.commitGradTrak();
 
@@ -135,7 +156,7 @@ public class DeleteCommandTest {
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         Model expectedModel = new ModelManager(model.getGradTrak(), new UserPrefs(),
-                new ModuleInfoList(), new CourseList(), new UserInfo());
+                moduleInfoList, new CourseList(), new UserInfo());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         ModuleTaken moduleTakenToDelete = model.getFilteredModulesTakenList().get(INDEX_FIRST_PERSON.getZeroBased());

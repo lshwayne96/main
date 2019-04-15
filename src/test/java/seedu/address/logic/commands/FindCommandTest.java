@@ -13,11 +13,10 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.parser.ParserUtil.FINISHED_STATUS_TRUE;
 import static seedu.address.testutil.TypicalModuleTaken.CS1010S;
 import static seedu.address.testutil.TypicalModuleTaken.CS1010X;
-import static seedu.address.testutil.TypicalModuleTaken.CS2101;
-import static seedu.address.testutil.TypicalModuleTaken.CS2103T;
+import static seedu.address.testutil.TypicalModuleTaken.GER1000;
 import static seedu.address.testutil.TypicalModuleTaken.KEYWORD_MATCHING_CS;
+import static seedu.address.testutil.TypicalModuleTaken.KEYWORD_MATCHING_CS1010S;
 import static seedu.address.testutil.TypicalModuleTaken.KEYWORD_MATCHING_CS2103T;
-import static seedu.address.testutil.TypicalModuleTaken.LSM1301;
 import static seedu.address.testutil.TypicalModuleTaken.MA1521;
 import static seedu.address.testutil.TypicalModuleTaken.getTypicalGradTrak;
 
@@ -103,27 +102,27 @@ public class FindCommandTest {
 
     @Test
     public void execute_codeOnly_multipleModulesFound() {
-        String expectedMessage = String.format(MESSAGE_MODULETAKEN_LISTED_OVERVIEW, 4);
+        String expectedMessage = String.format(MESSAGE_MODULETAKEN_LISTED_OVERVIEW, 2);
 
         FindModuleDescriptor descriptor = new FindModuleDescriptorBuilder().withCode(KEYWORD_MATCHING_CS).build();
         FindModulePredicate predicate = new FindModulePredicate(descriptor, model.getCurrentSemester());
         FindCommand command = new FindCommand(descriptor);
         expectedModel.updateFilteredModulesTakenList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CS2103T, CS2101, CS1010S, CS1010X), model.getFilteredModulesTakenList());
+        assertEquals(Arrays.asList(CS1010S, CS1010X), model.getFilteredModulesTakenList());
     }
 
     @Test
     public void execute_semesterOnly_multipleModulesFound() {
         String expectedMessage = String.format(MESSAGE_MODULETAKEN_LISTED_OVERVIEW, 2);
 
-        FindModuleDescriptor descriptor = new FindModuleDescriptorBuilder().withSemester("Y4S2").build();
+        FindModuleDescriptor descriptor = new FindModuleDescriptorBuilder().withSemester("Y5S2").build();
         FindModulePredicate predicate = new FindModulePredicate(descriptor, model.getCurrentSemester());
 
         FindCommand command = new FindCommand(descriptor);
         expectedModel.updateFilteredModulesTakenList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CS1010X, LSM1301), model.getFilteredModulesTakenList());
+        assertEquals(Arrays.asList(CS1010S, CS1010X), model.getFilteredModulesTakenList());
     }
 
     @Test
@@ -136,14 +135,14 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(descriptor);
         expectedModel.updateFilteredModulesTakenList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CS2103T, CS1010X), model.getFilteredModulesTakenList());
+        assertEquals(Arrays.asList(CS1010S, CS1010X), model.getFilteredModulesTakenList());
     }
 
     @Test
     public void execute_finishedStatusOnly_multipleModulesFound() {
         String expectedMessage = String.format(MESSAGE_MODULETAKEN_LISTED_OVERVIEW, 2);
-        model.setCurrentSemester(Semester.Y3S2);
-        expectedModel.setCurrentSemester(Semester.Y3S2);
+        model.setCurrentSemester(Semester.Y4S2);
+        expectedModel.setCurrentSemester(Semester.Y4S2);
 
         FindModuleDescriptor descriptor = new FindModuleDescriptorBuilder()
                 .withFinishedStatus(FINISHED_STATUS_TRUE).build();
@@ -152,7 +151,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(descriptor);
         expectedModel.updateFilteredModulesTakenList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CS2103T, MA1521), model.getFilteredModulesTakenList());
+        assertEquals(Arrays.asList(MA1521, GER1000), model.getFilteredModulesTakenList());
     }
 
     @Test
@@ -174,28 +173,28 @@ public class FindCommandTest {
     public void execute_multipleParameters_multipleModulesFound() {
         String expectedMessage = String.format(MESSAGE_MODULETAKEN_LISTED_OVERVIEW, 2);
 
-        FindModuleDescriptor descriptor = new FindModuleDescriptorBuilder().withSemester("Y4S2")
+        FindModuleDescriptor descriptor = new FindModuleDescriptorBuilder().withSemester("Y5S2")
                 .withGrade("D").withFinishedStatus(FINISHED_STATUS_FALSE).build();
         FindModulePredicate predicate = new FindModulePredicate(descriptor, model.getCurrentSemester());
 
         FindCommand command = new FindCommand(descriptor);
         expectedModel.updateFilteredModulesTakenList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CS1010X, LSM1301), model.getFilteredModulesTakenList());
+        assertEquals(Arrays.asList(CS1010S, CS1010X), model.getFilteredModulesTakenList());
     }
 
     @Test
     public void execute_multipleParameters_oneModuleFound() {
         String expectedMessage = String.format(MESSAGE_MODULETAKEN_LISTED_OVERVIEW, 1);
 
-        FindModuleDescriptor descriptor = new FindModuleDescriptorBuilder().withCode(KEYWORD_MATCHING_CS2103T)
-                .withSemester("Y1S2").withFinishedStatus(FINISHED_STATUS_FALSE).build();
+        FindModuleDescriptor descriptor = new FindModuleDescriptorBuilder().withCode(KEYWORD_MATCHING_CS1010S)
+                .withSemester("Y5S2").withFinishedStatus(FINISHED_STATUS_FALSE).build();
         FindModulePredicate predicate = new FindModulePredicate(descriptor, model.getCurrentSemester());
 
         FindCommand command = new FindCommand(descriptor);
         expectedModel.updateFilteredModulesTakenList(predicate);
 
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CS2103T), model.getFilteredModulesTakenList());
+        assertEquals(Arrays.asList(CS1010S), model.getFilteredModulesTakenList());
     }
 }

@@ -21,5 +21,7 @@ public class Messages {
     public static final String MESSAGE_PROJECT_HOUR_LIMIT_OUT_OF_ORDER = "Project hour is out of order";
     public static final String MESSAGE_PREPARATION_HOUR_LIMIT_OUT_OF_ORDER = "Preparation hour limit is out of order";
     public static final String MESSAGE_MODULETAKEN_LISTED_OVERVIEW = "GradTrak modules found: %1$d";
+    public static final String MESSAGE_PREREQUISITE_VIOLATED =
+            "Failed, this module is a prerequisite for other modules";
 
 }

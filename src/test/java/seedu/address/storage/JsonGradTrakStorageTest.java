@@ -2,9 +2,9 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static seedu.address.testutil.TypicalModuleTaken.CS1010X;
 import static seedu.address.testutil.TypicalModuleTaken.CS2030;
 import static seedu.address.testutil.TypicalModuleTaken.CS2040;
-import static seedu.address.testutil.TypicalModuleTaken.CS2103T;
 import static seedu.address.testutil.TypicalModuleTaken.getTypicalGradTrak;
 
 import java.io.IOException;
@@ -85,7 +85,7 @@ public class JsonGradTrakStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addModuleTaken(CS2030);
-        original.removeModuleTaken(CS2103T);
+        original.removeModuleTaken(CS1010X);
         jsonAddressBookStorage.saveGradTrak(original, filePath);
         readBack = jsonAddressBookStorage.readGradTrak(filePath).get();
         assertEquals(original, new GradTrak(readBack));

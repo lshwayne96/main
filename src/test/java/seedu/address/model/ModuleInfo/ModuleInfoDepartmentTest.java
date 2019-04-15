@@ -1,5 +1,6 @@
 package seedu.address.model.ModuleInfo;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -38,5 +39,31 @@ public class ModuleInfoDepartmentTest {
         assertTrue(ModuleInfoDepartment.isValidModuleInfoDepartment("mathemathics")); //only lower case
         assertTrue(ModuleInfoDepartment.isValidModuleInfoDepartment("Department of Socioloagy")); //multiple words
 
+    }
+
+    @Test
+    public void toStringTest() {
+        ModuleInfoDepartment dept = new ModuleInfoDepartment("Mathematics");
+        assertEquals("Mathematics", dept.toString());
+    }
+
+    @Test
+    public void equals() {
+        ModuleInfoDepartment depts = new ModuleInfoDepartment("Mathematics");
+        ModuleInfoDepartment deptsCopy = depts;
+
+        assertTrue(depts.equals(deptsCopy));
+
+        ModuleInfoDepartment diffdepts = new ModuleInfoDepartment("Science");
+
+        assertFalse(depts.equals(diffdepts));
+    }
+
+    @Test
+    public void hashcode() {
+        ModuleInfoDepartment depts = new ModuleInfoDepartment("Mathematics");
+        ModuleInfoDepartment deptsCopy = depts;
+
+        assertEquals(depts.hashCode(), deptsCopy.hashCode());
     }
 }

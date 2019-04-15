@@ -46,19 +46,6 @@ public class ModuleInfoList {
         return module;
     }
 
-    /**
-     * Creates a PreRequisite Tree for each ModuleInfo Class
-     * @return boolean isGenerated
-     */
-    public boolean generatePrerequisites() {
-        boolean isGenerated = false;
-
-        for (int i = 0; i < moduleInfoList.size(); i++) {
-            ModuleInfo module = moduleInfoList.get(i);
-        }
-        return isGenerated;
-    }
-
     public ObservableList<ModuleInfo> getObservableList() {
         ObservableList<ModuleInfo> observableList = FXCollections.observableArrayList(moduleInfoList);
         return observableList;

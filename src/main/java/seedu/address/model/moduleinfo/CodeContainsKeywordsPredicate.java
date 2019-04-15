@@ -28,6 +28,7 @@ public class CodeContainsKeywordsPredicate implements Predicate<ModuleInfo> {
         }
     }
 
+
     public String[] splitPredicate(String keyword) {
         return keyword.split(SPLITTER_REGEX);
     }

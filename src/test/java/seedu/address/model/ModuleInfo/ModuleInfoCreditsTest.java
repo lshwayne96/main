@@ -1,5 +1,6 @@
 package seedu.address.model.ModuleInfo;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -28,6 +29,32 @@ public class ModuleInfoCreditsTest {
         assertTrue(ModuleInfoCredits.isValidModuleInfoCredits(40));
         assertTrue(ModuleInfoCredits.isValidModuleInfoCredits(10));
         assertTrue(ModuleInfoCredits.isValidModuleInfoCredits(2.5));
+    }
+
+    @Test
+    public void toStringTest() {
+        ModuleInfoCredits title = new ModuleInfoCredits(4.0);
+        assertEquals("4.0", title.toString());
+    }
+
+    @Test
+    public void equals() {
+        ModuleInfoCredits credits = new ModuleInfoCredits(4.0);
+        ModuleInfoCredits creditsCopy = credits;
+
+        assertTrue(credits.equals(creditsCopy));
+
+        ModuleInfoCredits diffCredits = new ModuleInfoCredits(1.0);
+
+        assertFalse(credits.equals(diffCredits));
+    }
+
+    @Test
+    public void hashcode() {
+        ModuleInfoCredits credits = new ModuleInfoCredits(4.0);
+        ModuleInfoCredits creditsCopy = credits;
+
+        assertEquals(credits.hashCode(), creditsCopy.hashCode());
     }
 
 }

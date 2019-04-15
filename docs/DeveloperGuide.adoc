@@ -1005,8 +1005,8 @@ A project often depends on third-party libraries. For example, GradTrak depends 
 * prefers typing over mouse input
 * is reasonably comfortable using CLI applications
 
-*Value proposition*: planning modules to take in future semesters and graduation requirement without having
-to refer to different webpages.
+*Value proposition*: Allow students to plan modules to take in future semesters and at the same time view module prerequisites
+and graduation requirements without having to refer to different webpages.
 
 [appendix]
 == User Stories

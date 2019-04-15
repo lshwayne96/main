@@ -21,7 +21,7 @@ in the User and Developer's Guides.
 == Summary of contributions
 
 * *Major feature*: added the functionality for users to track their graduation requirements
-** What it does: This feature allows the user to check against a list of modules they have taken / are planning to take
+** What it does: This feature allows the user to check against a list of modules they have taken or plan to take
 and informs them whether they have fulfilled the requirements. The feature also allows the users
 to know approximately, the extent of completion of these graduation requirements.
 

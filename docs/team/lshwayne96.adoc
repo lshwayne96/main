@@ -22,17 +22,17 @@ The following sections illustrate these contributions in more detail, as well as
 This section summarises my coding and other helpful contributions to GradTrak.
 
 * *Major enhancement*: added a *module recommendation* feature
-** _What it does:_ This feature displays a list of modules which the user is recommended to read based on existing GradTrak modules and graduation requirements specific to the user's course of study.
+** _What it does:_ This feature displays a list of modules which the student is recommended to read based on existing GradTrak modules and graduation requirements specific to the student's course of study.
 The list is sorted primarily by the priority of the requirement type satisfied by the recommended module, and secondarily by the level of the module.
-** _Justification:_ This feature significantly benefits users who are unfamiliar with the exact graduation requirements of their course, or are unsure of what modules to read for future semesters.
+** _Justification:_ This feature significantly benefits students who are unfamiliar with the exact graduation requirements of their course, or are unsure of what modules to read for future semesters.
 They can simply pick a high-priority module near the top of the recommendation list -- this module already has its prerequisites satisfied, contributes to their graduation requirements and
-will likely serve as a prerequisite for higher level modules. This allows users to plan their modules systematically so that they are on the right track towards graduation.
+will likely serve as a prerequisite for higher level modules. This allows students to plan their modules systematically so that they are on the right track towards graduation.
 ** _Highlights:_ The implementation of this feature was challenging as it requires interactions with many components of GradTrak. It needs to retrieve information of all NUS modules,
-check each module for its preclusions or prerequisites in the user's module list, and determine whether it contributes to the user's course requirements and if so, the requirement type of highest priority that it satisfies.
-In particular, it was necessary to liaise with the implementation of the graduation-checking feature to ensure that the recommended modules actually bring the user closer to graduation.
+check each module for its prerequisites in the student's module list, and determine whether it contributes to the student's course requirements and if so, the requirement type of highest priority that it satisfies.
+In particular, it was necessary to liaise with the implementation of the graduation-checking feature to ensure that the recommended modules actually bring the student closer to graduation.
 
 
-* *Minor enhancement*: added additional parameters for the module finding feature, allowing the user to search GradTrak modules by
+* *Minor enhancement*: added additional parameters for the module finding feature, allowing the student to search GradTrak modules by
 module code, semester, grade or finished status.
 
 * *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#=undefined&search=lshwayne96[Project Code Dashboard]]
